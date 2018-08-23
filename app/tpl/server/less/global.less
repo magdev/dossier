@@ -1,0 +1,153 @@
+/**
+ * LESS for magdev/resume print theme
+ */
+
+// MIXINS:START
+
+//
+// Mixins
+//
+
+.border-radius(@radius) {
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+  border-radius: @radius;
+}
+
+// MIXINS:END
+
+// VARS:START
+
+//
+// Variables
+//
+
+@base-font-family: Arial, Verdana;
+@base-font-size: 13px;
+@base-font-color: #222;
+@base-background-color: #fff;
+@base-accent-color: #68d19b;
+
+@headline-1-size: (@base-font-size * 3);
+@headline-1-color: #fff;
+@headline-1-background-color: darken(@base-accent-color, 15%);
+
+
+@headline-2-color: @base-font-color;
+@headline-2-color-small: lighten(@headline-2-color, 30%);
+@headline-2-size: floor(@base-font-size * 1.6);
+@headline-2-size-small: (@headline-2-size - 5px);
+
+@leftcol-width: 350px;
+@leftcol-nav-margin: 10px 10px 0 15px;
+
+@icon-pdf: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAMAAADzapwJAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAw1BMVEX////++/v42dv30tXupqvyu7/0wsbtnaPwsLX54ePWJTL65ef31tjaO0flc3vVIS7xt7vPARD65ufgWmTQBRTPAA/zvsL//v7ldX3YLjryvMDgW2X53uDtnqTZNEDQBBPgWWPzv8PqkpjdSVTUHCnWJzTnf4fRCRfldn7hYmv31df//f34293eUlzXKDX0x8raPEfPAhHfU130xsnjbHXcRlHYMj7toqfeT1nkcnrvqa7smJ7SDhzaOUXcR1L53d/smqDOQe/+AAAAAWJLR0QAiAUdSAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAAd0SU1FB+IHFREcCLf3d7wAAACSSURBVBjTY2CgEmBkYmbBIszKxsDOgSnMycXNw4tFOR+/gKAQFsOFRUTFsCgXlxCVZMMiLiXKKygtgyEsKyrEKievoKikrKKK5Fg1dXEGBg1RUVFNLW0dhLCuHoO+gaGRsZQJrymSan4zaXlNHXSjzQVFLbQwLLQUFbXCdJ21jaQtFkfbManaYxFmc2AmNg5IAgAkagqCGD9ZrwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxOC0wNy0yMVQxNToyODowOCswMjowMKEt3m4AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTgtMDctMjFUMTU6Mjg6MDgrMDI6MDDQcGbSAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAABJRU5ErkJggg==');
+@icon-html: url('data:text/html;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAMAAADzapwJAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABHVBMVEX////Z7vt+xfFEqusonugpnuhDqut+xPHX7fv2+/55wvE4pepBqeuKyvL5/P7W7PuTzvMuoOl9xPH4/P73+/5ZtO0gmudlue4xoulJrevi8vySzfMqnuhWs+18xPFYs+2NzPPq9f37/f/g8fxetu5ouu9Gq+vY7fsim+c3pOne8Puu2vZqvO+Y0PQ2pOl3wfC33/fV7Prt9/0hmudCqeuRzfPl8/wlnOjQ6vqi1fXL5/m13ffu9/2c0vQqn+hHrOu53/et2vaz3ffm9Pwnnejd8PvK5/lxv/Da7vvS6/qHyfL0+v78/v+84PgjnOfc7/tpu+/9/v9wvvD6/f7P6fqCxvJXs+1nuu94wvG94fhtve9dtu6AxvFUse1/xfE/bvvIAAAAAWJLR0QAiAUdSAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAAd0SU1FB+IHFREcCLf3d7wAAADsSURBVBjTY2CgImBkYmZhZWPnQBHk5OLm4eXj5BcQFBJGiIqIiolLSPIxMEhJy8iKwIXlxORlFBSVGBiUVVTV5GCi6hpimlpglraOrrKeOlSYSd/AEMwwUhMT0zMWggqbmJpBGAJiIMAGFTa3sLSytgEybMHCdlBhVmElezFuBwYGJUcnVYQwD7+zsZiYi6orkO0mJqYGFWaXZnAH6fYAsj3FxLygwvya3j6yYmL2ILavmJ8/3DsBgUFiEsEgZohYKNyXwmHhES6RIJZ3VHQwIlD4YjRi1ZVE1KW54/hQwpCDndnFhS2OkZqRBQA4TBqQiOWEHQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxOC0wNy0yMVQxNToyODowOCswMjowMKEt3m4AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTgtMDctMjFUMTU6Mjg6MDgrMDI6MDDQcGbSAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAABJRU5ErkJggg==');
+
+// VARS:END
+
+
+
+//
+// Styles
+//
+
+
+// Reset
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: normal;
+    font-style: normal;
+    list-style-type: none;
+}
+
+// Base elements
+html, body {
+    background-color: @base-background-color;
+    font-family: @base-font-family;
+    font-size: @base-font-size;
+    color: @base-font-color;
+}
+html,body,.row-main,.col-main,.col-left {
+    height: 100%
+}
+body {
+    overflow: hidden;
+}
+h1 {
+    font-size: @headline-1-size;
+    color: @headline-1-color;
+    font-weight: bold;
+    background-color: @headline-1-background-color;
+    padding: 2px auto;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-align: center;
+}
+h2 {
+    font-size: @headline-2-size;
+    color: @headline-2-color;
+    font-weight: bold;
+    
+    small {
+        font-size: @headline-2-size-small;
+        color: @headline-2-color-small;
+        font-style: italic;
+    }
+}
+a {
+    text-decoration: none;
+}
+
+// Grid
+.row {
+  display: flex;
+}
+.col {
+  flex: 1;
+}
+
+.col-golden-narrow { flex: 0 0 38%; }
+.col-golden-wide { flex: 0 1 62%; }
+
+.col-left { 
+    flex: 0 0 @leftcol-width;
+    background-color: lighten(@base-accent-color, 10%);
+    border-right: 5px solid @headline-1-background-color;
+    
+    nav {
+        margin: @leftcol-nav-margin;
+        
+        li {
+            margin-bottom: 10px;
+            background-color: @base-background-color;
+            padding: 5px 10px;
+            .border-radius(5px);
+            
+            &.html {
+                background: @base-background-color @icon-html no-repeat top right;
+            }
+            &.pdf {
+                background: @base-background-color @icon-pdf no-repeat top right;
+            }
+                
+            a:first-child {
+                color: @base-font-color;
+            }
+            
+            dt,dd {
+                display: inline-block;
+            }
+            dt {
+                width: 38%;
+                float: left;
+            }
+            dd {
+                width: 62%;
+            }
+        }
+    }
+}
+ 

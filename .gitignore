@@ -1,0 +1,14 @@
+# Eclipse specific files
+.settings/
+.buildpath
+.project
+
+# OS files
+.directory
+.DS_Store
+Thumbs.db
+
+# App files
+example/
+vendor/
+.env

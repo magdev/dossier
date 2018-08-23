@@ -1,0 +1,12 @@
+<section class="cv">
+    <h2>{{ 'cv.header'|trans }}</h2>
+    
+    {% for tag in tags %}
+        <div class="tag tag-{{ tag }}">
+            <h3>{{ ('cv.headers.' ~ tag)|trans }}</h3>
+            {% for entry in cv.filterByTag(tag) %}
+                {{ include('parts/cv/entry.html.twig') }}
+            {% endfor %}
+        </div>
+    {% endfor %}
+</section>

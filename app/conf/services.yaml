@@ -1,0 +1,59 @@
+imports:
+    - { resource: 'parameters.yaml' }
+    - { resource: '/etc/dossier/parameters.yaml', ignore_errors: true }
+    
+services:
+
+    config:
+        class: '\Magdev\Dossier\Service\ConfigService'
+        
+    monolog:
+        class: '\Magdev\Dossier\Service\MonologService'
+        arguments: ['@config']
+        
+    phar_helper:
+        class: '\Magdev\Dossier\Service\PharHelperService'
+        arguments: ['@monolog']
+        
+    minifer:
+        class: '\Magdev\Dossier\Service\MinifierService'
+        arguments: ['@monolog']
+        
+    translator:
+        class: '\Magdev\Dossier\Service\TranslatorService'
+        arguments: ['@config', '@monolog']
+        
+    uri_helper:
+        class: '\Magdev\Dossier\Service\UriHelperService'
+        arguments: ['@monolog', '@phar_helper']
+        
+    formatter:
+        class: '\Magdev\Dossier\Service\FormatterService'
+        arguments: ['@translator']
+        
+    markdown:
+        class: '\Magdev\Dossier\Service\MarkdownService'
+        arguments: ['@monolog', '@formatter']
+        
+    output_helper:
+        class: '\Magdev\Dossier\Service\OutputHelperService'
+        arguments: ['@translator']
+        
+    template:
+        class: '\Magdev\Dossier\Service\TemplateService'
+        arguments: ['@markdown', '@translator', '@minifer', '@config', '@monolog']
+        
+    cssproc:
+        class: '\Magdev\Dossier\Service\StylesheetProcessorService'
+        arguments: ['@monolog', '@template', '%scss.formatter%']
+        
+    analyzer:
+        class: '\Magdev\Dossier\Service\AnalyzerService'
+        arguments: ['@config', '@monolog']
+        
+    pdf:
+        class: '\Magdev\Dossier\Service\PdfService'
+        arguments: ['@config', '@monolog', '@template']
+        
+        
+        

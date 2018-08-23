@@ -1,0 +1,190 @@
+app:
+    header: 'Persönliches Dossier aus Markdown-Dateien erstellen'
+
+date:
+    start: 'Beginn'
+    end: 'Ende'
+    until: 'bis'
+    today: 'heute'
+
+    format:
+        year: "Ein Jahr|%y Jahre"
+        month: "Ein Monat|%m Monate"
+        day: "Ein Tag|%d Tage"
+info:
+    debug_mode:  'DEBUG MODE  '
+    environment: 'ENVIRONMENT '
+    
+toc:
+    resume: 'Einseitiges Résumé'
+    cv: 'Curriculum Vitae'
+    certs: 'Zeugnisse und Zertifikate'
+    projects: 'Aktuelle Seitenprojekte'
+    
+form:
+    init:
+        header: 'Neues Dossier initialisieren'
+        use_userstyles: 'Möchten sie benutzerdefinierte Stylesheets verwenden?'
+        style_type: 'Preprocessor Typ'
+    intro:
+        header: 
+            add: 'Einleitungsseite erstellen'
+            edit: 'Einleitungsseite bearbeiten'
+        text: 'Bitte geben sie den Einleitungstext ein'
+        add_quotes: 'Möchten sie Zitate hinzufügen?'
+        quote_text: 'Zitat'
+        quote_author: 'Autor des Zitats'
+        show_quotes: 'Wo sollen die Zitate angezeigt werden?'
+    person:
+        header: 
+            add: 'Persönliche Daten erstellen'
+            edit: 'Persönliche Daten bearbeiten'
+        firstname: 'Vorname'
+        lastname: 'Nachname'
+        nationality: 'Nationalität'
+        birthdate: 'Geburtsdatum (YYYY-MM-DD)'
+        birthplace: 'Geburtsort'
+        residence: 'Aktueller Wohnort'
+        status: 'Familientstand'
+        tagline: 'Tagline'
+        work_license: 'Lizenz'
+        language: 'Sprache'
+        level: 'Grad'
+        text: 'Kurzbiographie'
+        add_languages: 'Möchten sie Sprachen hinzufügen?'
+        projects: 'Seitenprojekte'
+        interests: 'Persönliche Interessen'
+        links: 'Links'
+    cv:
+        header: 
+            add: 'CV-Eintrag erstellen'
+            edit: 'CV-Eintrag bearbeiten'
+        text: 'Bitte geben sie einen Text ein'
+        start_date: 'Start-Datum (YYYY-MM-DD)'
+        end_date: 'End-Datum (YYYY-MM-DD)'
+        position: 'Position'
+        company: 'Unternehmen'
+        industry: 'Branche'
+        qualification: 'Abschluss'
+        tag: 'Tag'
+        skills: 'Fertigkeiten und Kenntnisse'
+        achievements: 'Erreichte Ziele'
+        toolbox: 'Werkzeuge'
+        use_in_resume: 'In Résumé verwenden?'
+cover:
+    subtitle: 'Bewerbungsdossier'
+    
+intro:
+    toc: 'Auf den folgenden Seiten finden sie als Beilagen:'
+
+projects:
+    header: 'Aktuelle Projekte'
+    fields: 
+      status: 'Status'
+      role: 'Rolle'
+    status:
+        development: 'In Entwicklung'
+        production: 'Produktivbetrieb'
+        private: 'Privat'
+        published: 'Veröffentlicht'
+        eol: 'Nicht mehr im Einsatz'
+
+cv:
+    header: 'Curriculum Vitae'
+    headers:
+        education: "Schule, Aus- und Weiterbildung"
+        experience: 'Berufserfahrung'
+        other: 'Sonstiges'
+    entry:
+        qualification: "Abschluss:"
+        skills: 'Erworbene Fähigkeiten und Kenntnisse:'
+        achievements: 'Erreichte Ziele'
+
+resume:
+    header: 'Résumé'
+    headers:
+        skills: 'Kenntnisse und Fähigkeiten'
+        personal: 'Persönliche Informationen'
+        links: 'Links'
+        contact: 'Kontaktdaten'
+        achievements: 'Erreichte Ziele'
+        experience: 'Berufserfahrung'
+        qualification: 'Qualifikationen'
+        bio: 'Bio'
+        toolbox: 'Werkzeuge'
+        personal_interest: 'Persönliche Interessen'
+        current_projects: 'Aktuelle Seitenprojekte'
+        references: Referenzen
+    personal:
+        name: 'Name'
+        birthdate: 'Geboren am'
+        birthplace: 'in'
+        status: 'Familienstatus'
+        nationality: 'Nationalität'
+        languages: 'Sprachen'
+        residence: 'Akt. Wohnort'
+        work_license: 'Lizenz'
+    language:
+        level:
+            native: 'Muttersprache'
+            fluent: 'Flüssig'
+            good: 'Gut'
+    contact:
+        email: 'E-Mail'
+        phone: 'Telefon'
+        chat: 'Hangouts'
+
+certs:
+    header: 'Zeugnisse und Zertifikate'
+
+server:
+    index:
+        header: 'Dossier'
+        title: 'Dossier Übersicht'
+        filesize: 'Dateigrösse'
+        filetime: 'Erstellt am'
+        new_window: 'In neuen Fenster/Tab öffnen'
+        
+message:
+    input:
+        required_value: 'Dieser Wert ist erforderlich'
+        invalid_date: 'Ungültiges Datum'
+        invalid_tag: 'Ungültige Kategorie: %s'
+    build:
+        success: 'Ihr persönliches Dossier wurde erfoglreich erstellt'
+    dump:
+        success: 'Eine lokale Kopie des Themes %theme% wurde erfolgreich erstellt'
+    export:
+        template_dir: 'Bitte tragen sie folgendes in ihre .bashrc oder .profile ein:'
+        template_homedir: 'Die Dateien wurden nach ~/.dossier/tpl kopiert'
+        code:
+            template_environment: 'export DOSSIER_THEME_DIR="%path%"'
+    entry:
+        success: 'Der CV-Eintrag wurde erfolgreich erstellt'
+    command:
+        initialized: 'Umgebung initiaisiert'
+    output_file: 'Ausgabe-Datei'
+    locale: 'Verwende Sprache: %locale%'
+    theme: 'Verwende Theme: %theme%'
+    stylesheet:
+        less: 'LESS-Stylesheet gefunden'
+        scss: 'SCSS-Stylesheet gefunden'
+    model:
+        person: 'Person-Model geladen'
+        intro: 'Intro-Model geladen'
+        letter: 'Letter-Model geladen'
+        cv: 'CV mit %count% Einträgen geladen'
+    config:
+        deleted: 'Konfigurationseintrag %path% wurde gelöscht oder auf den Standardwert zurückgesetzt'
+    write:
+        success: 'Datei %name% erfolgreiche gespeichert'
+    html:
+        created: 'HTML-Dokument in %file% erstellt'
+    pdf:
+        created: 'PDF-Dokument in %file% erstellt'
+        
+pdf:
+  page:
+    title: '{{title}}'
+    number: '{{page}}'
+    date: '{{date}}'

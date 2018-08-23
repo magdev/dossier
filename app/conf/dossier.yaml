@@ -1,0 +1,85 @@
+### Settings file for magdev/dossier
+charset: utf-8
+
+# Date formats
+date:
+  format:
+    long: "d. F Y"
+    short: "d.m.Y"
+
+# Settings for TranslatorService
+translator:
+  locale: en
+  fallback_locales:
+    - en
+    - de
+    
+# Settings for the CV
+cv:
+  default_tag: experience
+  tags:
+    - experience
+    - education
+    - other
+   
+# Form settings
+form:
+  label:
+    length: 40
+    prefix: '  '
+    
+# Available language levels
+language:
+  default_level: native
+  levels:
+    - native
+    - fluent
+    - good
+    - beginner
+    
+# Monolog settings
+monolog:
+  log_level: 200
+  skip_class_partials:
+    - 'Magdev\\Dossier\\'
+    - 'Symfony\\Component\\'
+    
+# Output styles
+style:
+  dossier_status_thresholds:
+    - { min: 0, max: 54, color: 'lightred' }
+    - { min: 55, max: 74, color: 'lightyellow' }
+    - { min: 75, max: 100, color: 'lightgreen' }
+    
+      
+# Settings for external editor
+editor:
+  command: '/usr/bin/kate %s'
+  
+# PDFShift settings
+pdfshift:
+  apikey: ''
+  page:
+    format: A4
+    margin:
+      left: 0
+      right: 0
+      top: 0
+      bottom: 0
+  header:
+    spacing: 20px
+  footer:
+    spacing: 20px
+  security:
+    author: ''
+    userPassword: ''
+    ownerPassword: ''
+    noPrint: false
+    noCopy: false
+    noModify: true
+  stylesheet:
+    use_print: true
+  http:
+    user_agent: ''
+    
+    

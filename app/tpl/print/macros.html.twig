@@ -1,0 +1,50 @@
+{% macro show_quotes(quotes, class) %}
+    <div class="quotes {{ class|default('top') }}">
+        {% for quote in quotes %}
+        <blockquote>
+            <span class="text">{{ quote.quoteText }}</span> 
+            {% if quote.quoteAuthor %}
+                <span class="author">{{ quote.quoteAuthor }}</span>
+            {% endif %}
+        </blockquote>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+
+{% macro list_simple_array(entries, tag) %}
+    {% set tag = tag|default('li') %}
+    {% for line in entries %}
+        <{{ tag }}>{{ line|inlinemd }}</{{ tag }}>
+    {% endfor %}
+{% endmacro %}
+
+
+{% macro list_link_array(entries, tag) %}
+    {% set tag = tag|default('li') %}
+    {% for link in entries %}
+        <{{ tag }}><a href="{{ link }}" target="_blank">{{ link }}</a></{{ tag }}>
+    {% endfor %}
+{% endmacro %}
+
+
+{% macro list_entry_attribute(entries, attribute, tag) %}
+    {% set tag = tag|default('li') %}
+    {% for entry in entries %}
+        {% if attribute(entry, attribute)|length > 0 %}
+            {% for line in attribute(entry, attribute) %}
+                <{{ tag }}>{{ line|inlinemd }}</{{ tag }}>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+
+{% macro list_references(references) %}
+    {% for reference in references %}
+        <li>
+            
+        </li>
+    {% endfor %}
+{% endmacro %}
+

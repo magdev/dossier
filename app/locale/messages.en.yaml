@@ -1,0 +1,117 @@
+app:
+    header: 'Create a personal dossier from Markdown files'
+
+date:
+    start: 'Begin'
+    end: 'End'
+    until: 'until'
+    today: 'today'
+
+    format:
+        year: "One year|%y years"
+        month: "One month|%m months"
+        day: "One day|%d days"
+
+info:
+    debug_mode:  'DEBUG MODE  '
+    environment: 'ENVIRONMENT '
+    
+cover:
+    subtitle: 'Personal Dossier'
+
+cv:
+    header: 'Curriculum Vitae'
+    headers:
+        education: "Education"
+        experience: 'Job Experience'
+        other: 'Other'
+    entry:
+        qualification: "Degree:"
+        skills: 'Obtained skills:'
+        achievements: 'Achievements'
+    question:
+        intro: 'Bitte geben sie die entsprechenden Daten ein:'
+        start_date: ' An welchem Tag begann die Tätigkeit? '
+        end_date: ' An welchem Tag endete die Tätigkeit? '
+        tag: ' Zu welcher Kategorie gehört der Eintrag? '
+        position: ' Welche Position haben sie bekleidet? '
+        company: ' Wie heisst die Firma, bei der sie angestellt waren? '
+        industry: ' In welcher Branche waren sie tätig? '
+        achievements: ' Welche Ziele haben sie während der Tätigkeit erreicht? '
+        qualification: ' Welche Qualification haben sie erreicht? '
+        skills: ' Welche fertigkeiten und Kenntnisse haben sie erworben? '
+        notes: ' Notizen zu diesem Eintrag: '
+        description: ' Beschreiben sie ihre Tätigkeiten: '
+        use_in_resume: ' Soll dieser Eintrag im Résumé verwendet werden? '
+        
+resume:
+    header: 'Résumé'
+    headers:
+        skills: 'Skills'
+        personal: 'Personal Information'
+        links: 'Links'
+        contact: 'Contact'
+        achievements: 'Achievements'
+        experience: 'Job Experience'
+        qualification: 'Qualifications'
+        bio: 'Bio'
+        toolbox: 'Toolbox'
+        personal_interest: 'Personal Interests'
+        current_projects: 'Current Sideprojects'
+    personal:
+        name: 'Name'
+        birthdate: 'born at'
+        birthplace: 'in'
+        status: 'Familiy status'
+        nationality: 'Nationality'
+        languages: 'Languagues'
+        residence: 'Current Residence'
+        work_license: 'License'
+    language:
+        level:
+            native: 'native'
+            fluent: 'fluent'
+            good: 'good'
+            rookie: 'rookie'
+    contact:
+        email: 'E-Mail'
+        phone: 'Phone'
+        chat: 'Hangouts'
+
+certs:
+    header: 'Certificates'
+
+message:
+    input:
+        required_value: 'This value is required'
+        invalid_date: 'Invalid date'
+        invalid_tag: 'Invalid tag: %s'
+    build:
+        success: 'Your personal dossier has been successfully built'
+    dump:
+        success: 'A local copy of the theme %theme% was created successfully'
+    export:
+        template_dir: 'Please add the following to your .bashrc or .profile file:'
+        template_homedir: 'The files are copied to ~/.dossier/tpl'
+        code:
+            template_environment: 'export DOSSIER_THEME_DIR="%path%"'
+    entry:
+        success: 'Der CV-Eintrag wurde erfolgreich erstellt'
+    command:
+        initialized: 'Environment loaded'
+    output_file: 'Output-File'
+    locale: 'Using locale: %locale%'
+    theme: 'Using theme: %theme%'
+    stylesheet:
+        less: 'LESS-Stylesheet found'
+        scss: 'SCSS-Stylesheet found'
+    model:
+        person: 'Person-Model loaded'
+        intro: 'Intro-Model loaded'
+        cv: 'CV with %count% entries loaded'
+    config:
+        deleted: 'Configuration value %path% successfully deleted or resetted to default value'
+    write:
+        success: 'File %name% successfully written'
+        
+        

@@ -1,0 +1,16 @@
+<section class="certs">
+    <h2>{{ 'certs.header'|trans }}</h2>
+    {% for entry in cv.filterByCertificates() %}
+        {% for cert in entry.certificates %}
+            <div class="certificate">
+                <figure>
+                    <figcaption>
+                        <h3>{{ entry.position }} {% if cert.type %}- {{ cert.type }}{% endif %} 
+                        <small>{{ entry.endDate.format('Y') }} - {{ entry.company }}</small></h3>
+                    </figcaption>
+                    <img src="{{ cert.dataUri|raw }}" alt="{{ cert.fileObject.filename }}">
+                </figure>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</section>

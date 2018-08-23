@@ -1,0 +1,139 @@
+{% set useInResume = cv.filterByUseInResume() %}
+{% set toolbox = cv.filterByToolbox() %}
+{% import "macros.html.twig" as macros %}
+    
+<section class="resume">
+    <h2>{{ 'resume.header'|trans }}</h2>
+    <div class="row">
+        <div class="col col-resume col-1">
+
+            <!-- Personal Information -->
+            <h3>{{ 'resume.headers.personal'|trans }}</h3>
+            <dl class="horizontal">
+                <dt>{{ 'resume.personal.name'|trans }}</dt>
+                <dd>{{ person.getName(true) }}</dd>
+                <dt>{{ 'resume.personal.birthdate'|trans }}</dt>
+                <dd>{{ person.birthdate.format(config('date.format.long')) }}</dd>
+                <dt>{{ 'resume.personal.birthplace'|trans }}</dt>
+                <dd>{{ person.birthplace }}</dd>
+                <dt>{{ 'resume.personal.residence'|trans }}</dt>
+                <dd>{{ person.residence }}</dd>
+                <dt>{{ 'resume.personal.status'|trans }}</dt>
+                <dd>{{ person.status }}</dd>
+                <dt>{{ 'resume.personal.nationality'|trans }}</dt>
+                <dd>{{ person.nationality }}</dd>
+                {% if person.workLicense %}
+                    <dt>{{ 'resume.personal.work_license'|trans }}</dt>
+                    <dd>{{ person.workLicense }}</dd>
+                {% endif %}
+                {% if person.languages|length > 0 %}
+                    <dt>{{ 'resume.personal.languages'|trans }}</dt>
+                    <dd>
+                        <ul>
+                            {% for lang in person.languages %}
+                                <li>{{ lang.language }} <small>({{ ('resume.language.level.' ~ lang.level)|trans }})</small></li>
+                            {% endfor %}
+                        </ul>
+                    </dd>
+                {% endif %}
+            </dl>
+
+            <!-- Contact Information -->
+            {% if person.contacts|length > 0 %}
+                <h3>{{ 'resume.headers.contact'|trans }}</h3>
+                <dl class="horizontal">
+                    {% for contact in person.contacts %}
+                        {% set type = contact.type %}
+                        {% if contact.type == 'email' or contact.type == 'phone' %}
+                            {% set type = ('resume.contact.' ~ contact.type)|trans %}
+                        {% endif %}
+                        <dt>{{ type }}</dt>
+                        <dd>{{ contact.address }}</dd>
+                    {% endfor %}
+                </dl>
+            {% endif %}
+
+            <!-- Job Experience -->
+            <h3>{{ 'resume.headers.experience'|trans }}</h3>
+            <dl class="horizontal">
+                {% for industry, length in cv.getExperienceYears() %}
+                    <dt>{{ industry }}</dt>
+                    <dd>{{ length }}</dd>
+                {% endfor %}
+            </dl>
+
+            <!-- Bio -->
+            {% if person.content %}
+                <h3>{{ 'resume.headers.bio'|trans }}</h3>
+                <div class="bio">{{ person.content|raw }}</div>
+            {% endif %}
+            
+            <!-- Qualifications -->
+            <h3>{{ 'resume.headers.qualification'|trans }}</h3>
+            <ul>
+                {% for entry in cv.qualifications %}
+                    <li>{{ entry.qualification|splitmerge(',', '</li><li>') }}</li>
+                {% endfor %}
+            </ul>
+
+            <!-- Personal Toolbox -->
+            {% if toolbox|length > 0 %}
+                <h3>{{ 'resume.headers.toolbox'|trans }}</h3>
+                <ul>
+                    {% for entry in toolbox %}
+                        {{ macros.list_simple_array(entry.toolbox) }}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <!-- Personal Interests -->
+            {% if person.interests|length > 0 %}
+                <h3>{{ 'resume.headers.personal_interest'|trans }}</h3>
+                <ul>
+                    {{ macros.list_simple_array(person.interests) }}
+                </ul>
+            {% endif %}
+        </div>
+
+
+
+        <div class="col col-resume col-2">
+
+
+            <!-- Links -->
+            {% if person.links|length > 0 %}
+                <h3>{{ 'resume.headers.links'|trans }}</h3>
+                <ul>
+                    {{ macros.list_link_array(person.links) }}
+                </ul>
+            {% endif %}
+            
+            <!-- References -->
+            {% if person.references|length > 0 %}
+                <h3>{{ 'resume.headers.references'|trans }}</h3>
+                <ul>
+                    {{ macros.list_references(person.references) }}
+                </ul>
+            {% endif %}
+
+            {% if person.projects|length > 0 %}
+                <h3>{{ 'resume.headers.current_projects'|trans }}</h3>
+                <ul>
+                    {{ macros.list_simple_array(person.projects) }}
+                </ul>
+            {% endif %}
+
+            {% if useInResume|length > 0 %}
+                <h3>{{ 'resume.headers.skills'|trans }}</h3>
+                <ul>
+                    {{ macros.list_entry_attribute(useInResume, 'skills') }}
+                </ul>
+                
+                <h3>{{ 'resume.headers.achievements'|trans }}</h3>
+                <ul>
+                    {{ macros.list_entry_attribute(useInResume, 'achievements') }}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</section>

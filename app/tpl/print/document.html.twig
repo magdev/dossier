@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}">
+  <!-- Build with magdev/dossier -->
+  <head>
+    <meta char{{ ('set="'~config('charset')~'"')|raw }}> 
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    {% if favicon %}<link rel="shortcut icon" href="{{ favicon }}">{% endif %}
+    <title>{{ 'cover.subtitle'|trans }} | {{ person.name }}</title>
+    <style media="screen,print">
+    {{ stylesheet|raw }}
+    {{ userstyles|raw }}
+    </style>
+  </head>
+  <body class="theme-{{ theme }}">
+    {% if is_disabled(disabled.cover) == false %}
+        {{ include('parts/cover.html.twig') }}
+    {% endif %}
+    <article>
+        {% if is_disabled(disabled.intro) == false %}
+            {{ include('parts/intro.html.twig') }}
+        {% endif %}
+        {% if is_disabled(disabled.resume) == false %}
+            {{ include('parts/resume.html.twig') }}
+        {% endif %}
+        {% if is_disabled(disabled.projects) == false %}
+            {{ include('parts/projects.html.twig') }}
+        {% endif %}
+        {% if is_disabled(disabled.cv) == false %}
+            {{ include('parts/cv.html.twig') }}
+        {% endif %}
+        {% if is_disabled(disabled.certs) == false %}
+            {{ include('parts/certs.html.twig') }}
+        {% endif %}
+    </article>
+  </body>
+</html>

@@ -1,0 +1,2 @@
+parameters:
+    scss.formatter: "\\Leafo\\ScssPhp\\Formatter\\Crunched"

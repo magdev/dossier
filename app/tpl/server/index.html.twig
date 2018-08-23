@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}">
+  <!-- Build with magdev/dossier -->
+  <head>
+    <meta char{{ ('set="'~config('charset')~'"')|raw }}> 
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    {% if favicon %}<link rel="shortcut icon" href="{{ favicon }}">{% endif %}
+    <title>{{ 'server.index.title'|trans }} | {{ person.name }}</title>
+    <style media="screen,print">
+    {{ stylesheet|raw }}
+    </style>
+  </head>
+  <body class="theme-{{ theme }}">
+    <div class="row row-main">
+        <div class="col col-left">
+            <h1>{{ 'server.index.header'|trans }}</h1>
+            <nav>
+                <ul>
+                    {% for link in links %}
+                        {% set parts = parseFilename(link.filename) %}
+                        {% set time = link.getCTime()|unixToDateTime %}
+                        <li class="{{ parts.type }}">
+                            <a href="/{{ link.filename }}" target="ifm">
+                                <h2>{{ parts.name }} <small>({{ parts.theme }}, {{ parts.locale }})</small></h2>
+                            </a>
+                            <dl>
+                                <dt>{{ 'server.index.filesize'|trans }}</dt>
+                                <dd>{{ link.size|filesize }}</dd>
+                                <dt>{{ 'server.index.filetime'|trans }}</dt>
+                                <dd>{{ time.format('d.m.Y H:i:s') }}</dd>
+                            </dl>
+                            <a href="/{{ link.filename }}" target="_blank">{{ 'server.index.new_window'|trans }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+        <div class="col col-main">
+            <iframe height="100%" width="100%" name="ifm" src="/{{ first_link.filename }}"></iframe>
+        </div>
+    </div>
+  </body>
+</html>

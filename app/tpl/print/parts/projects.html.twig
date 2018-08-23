@@ -1,0 +1,25 @@
+{% if projects|length > 0 %}
+    <section class="projects">
+        <h2>{{ 'projects.header'|trans }}</h2>
+        
+        <div class="content">
+        {% for project in projects %}
+            <article class="project">
+                <h3>{{ project.name }} {% if project.stack %}<small>({{ project.stack }})</small>{% endif %}</h3>
+                <dl class="horizontal">
+                    <dt>{{ 'projects.fields.status'|trans }}</dt>
+                    <dd>
+                        <p class="badge badge-{{ project.status }}">{{ ('projects.status.' ~ project.status)|trans }}</p>
+                    </dd>
+                    {% if project.role %}
+                        <dt>{{ 'projects.fields.role'|trans }}</dt>
+                        <dd>{{ project.role }}</dd>
+                    {% endif %}
+                </dl>
+                <p class="short-description">{{ project.shortDescription }}</p>
+                {{ project.content|raw }}
+            </article>
+        {% endfor %}
+        </div>
+    </section>
+{% endif %}

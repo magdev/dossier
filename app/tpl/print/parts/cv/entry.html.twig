@@ -1,0 +1,32 @@
+<div class="cv-entry row">
+    <div class="col col-fifteen col-date">
+        <p class="date">
+            <span class="start">{{ entry.startDate.format(config('date.format.short')) }}</span>
+            <span class="end"><small>{{ 'date.until'|trans }}</small> 
+                {% if is_today(entry.endDate) %}
+                    {{ 'date.today'|trans }}
+                {% else %}
+                    {{ entry.endDate.format(config('date.format.short')) }}
+                {% endif %}
+            </span>
+        </p>
+    </div>
+    <div class="col col-info">
+        <h4>{{ entry.position }} {% if entry.industry %}<small>({{ entry.industry }})</small>{% endif %}</h4>
+        <p class="company">{{ entry.company }}</p>
+        {% if entry.description %}
+            <div class="content">
+                {{ entry.description|raw }}
+            </div>
+        {% endif %}
+        {% if entry.qualification %}
+            <p class="qualification"><small>{{ 'cv.entry.qualification'|trans }}</small><br/>{{ entry.qualification }}</p>
+        {% endif %}
+        {% if entry.skills|length > 0 %}
+            <p class="skills"><small>{{ 'cv.entry.skills'|trans }}</small><br/>{{ entry.skills|merge|inlinemd }}</p>
+        {% endif %}
+        {% if entry.achievements|length > 0 %}
+            <p class="achievements"><small>{{ 'cv.entry.achievements'|trans }}</small><br/>{{ entry.achievements|merge|inlinemd }}</p>
+        {% endif %}
+    </div>
+</div>
