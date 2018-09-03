@@ -130,7 +130,10 @@ class PharHelperService
      */
     public function copy(string $source, string $target): bool
     {
-        return copy($this->getPharUrl($source), $target);
+        if ($this->isInPhar() && substr($source, 0, 4) !== 'phar') {
+            $source = $this->getPharUrl($source);
+        }
+        return copy($source, $target);
     }
     
     
