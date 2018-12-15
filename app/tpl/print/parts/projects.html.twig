@@ -17,6 +17,9 @@
                     {% endif %}
                 </dl>
                 <p class="short-description">{{ project.shortDescription }}</p>
+                {% if project.repository %}
+                <p><a href="{{ project.repository }}" target="_blank">{{ project.repository }}</a>
+                {% endif %}
                 {{ project.content|raw }}
             </article>
         {% endfor %}
