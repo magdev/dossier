@@ -11,7 +11,6 @@ Dossier requires PHP 7.2+ and the following extensions enabled:
 
 * Phar
 * SPL
-* Date
 * fileinfo
 * mbstring
 * Bz2
