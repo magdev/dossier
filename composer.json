@@ -32,12 +32,12 @@
 		"mnapoli/front-yaml" : "^1.6",
 		"oyejorge/less.php" : "v1.7.0.14",
 		"erusev/parsedown-extra" : "^0.7.1",
-		"zaininnari/html-minifier" : "*",
 		"leafo/scssphp" : "^0.7.6",
 		"adbario/php-dot-notation" : "^2.0",
 		"magdev/console-form" : "^0.0.7",
 		"monolog/monolog" : "^1.23",
-		"pdfshift/pdfshift-php" : "~1.0.2"
+		"pdfshift/pdfshift-php" : "~1.0.2",
+		"raivisdejus/html-minifier" : "~0.5"
 	},
 	"config" : {
 		"bin-dir" : "bin"
@@ -64,5 +64,8 @@
 			"url" : "git@github.com:magdev/console-form.git",
 			"name" : "magdev/console-form"
 		}
-	]
+	],
+	"require-dev" : {
+		"wapmorgan/php-code-analyzer" : "^1.0"
+	}
 }
