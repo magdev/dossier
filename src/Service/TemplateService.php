@@ -214,7 +214,7 @@ class TemplateService
         $path = $destDir.'/'.$name.'.'.$this->translator->getTranslator()->getLocale().'.html';
         
         $html = $this->twig->render($template, $vars);
-        $html = $this->minifier->minify($html);
+        //$html = $this->minifier->minify($html);
         if (!file_put_contents($path, $html)) {
             throw new \RuntimeException('Error writing output file: '.$path);
         }
