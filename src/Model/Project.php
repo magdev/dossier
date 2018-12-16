@@ -30,26 +30,40 @@
  
 namespace Magdev\Dossier\Model;
 
-
 use Magdev\Dossier\Model\Base\BaseModel;
+use Mni\FrontYAML\Document;
 
+/**
+ * Model for projects page
+ *
+ * @author magdev
+ */
 class Project extends BaseModel
 {
+    /**
+     * Project name
+     * @var string
+     */
     protected $name = '';
-    protected $status = '';
-    protected $url = '';
+    
+    /**
+     * Public URLs
+     * @var array
+     */
+    protected $urls = array();
+    
+    /**
+     * Short Description
+     * @var string
+     */
     protected $shortDescription = '';
+    
+    /**
+     * Project stack
+     * @var string
+     */
     protected $stack = '';
-    protected $role = '';
-
-
-
-    public function getRole(): string
-    {
-        return $this->role;
-    }
-
-
+    
 
     public function getStack(): string
     {
@@ -57,35 +71,26 @@ class Project extends BaseModel
     }
 
 
-
     public function getName(): string
     {
         return $this->name;
     }
 
-
-
-    public function getStatus(): string
+    
+    public function hasUrls(): bool
     {
-        return $this->status;
+        return sizeof($this->urls) > 0;
     }
 
 
-
-    public function getUrl(): string
+    public function getUrls(): array
     {
-        return $this->url;
+        return $this->urls;
     }
-
 
 
     public function getShortDescription(): string
     {
         return $this->shortDescription;
     }
-
-
-
-    
 }
-

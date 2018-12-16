@@ -69,16 +69,6 @@ class Intro extends BaseModel implements PhotoInterface, AnalyzableInterface
     protected $showQuotes = self::SHOW_TOP;
     
 
-    /**
-     * Get the headline
-     * 
-     * @return string
-     */
-    public function getHeadline(): string
-    {
-        return $this->headline;
-    }
-
 
 
     /**
@@ -90,6 +80,17 @@ class Intro extends BaseModel implements PhotoInterface, AnalyzableInterface
     {
         $this->quotes = new \ArrayObject();
         parent::__construct($document);
+    }
+    
+    
+    /**
+     * Get the headline
+     *
+     * @return string
+     */
+    public function getHeadline(): string
+    {
+        return $this->headline;
     }
     
     

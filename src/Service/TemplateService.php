@@ -120,13 +120,15 @@ class TemplateService
     {
         $theme = !$theme ? $this->theme : $theme;
         
-        if (getenv('DOSSIER_THEME_DIR')) {
-            if (is_dir(getenv('DOSSIER_THEME_DIR').'/'.$theme) && file_exists(getenv('DOSSIER_THEME_DIR').'/'.$theme.'/'.$file)) {
-                return getenv('DOSSIER_THEME_DIR').'/'.$theme.'/'.$file;
+        if (getenv('APP_ENV') == 'prod') {
+            if (getenv('DOSSIER_THEME_DIR')) {
+                if (is_dir(getenv('DOSSIER_THEME_DIR').'/'.$theme) && file_exists(getenv('DOSSIER_THEME_DIR').'/'.$theme.'/'.$file)) {
+                    return getenv('DOSSIER_THEME_DIR').'/'.$theme.'/'.$file;
+                }
             }
-        }
-        if (is_dir(getenv('HOME').'/.dossier/tpl/'.$theme) && file_exists(getenv('HOME').'/.dossier/tpl/'.$theme.'/'.$file)) {
-            return getenv('HOME').'/.dossier/tpl/'.$theme.'/'.$file;
+            if (is_dir(getenv('HOME').'/.dossier/tpl/'.$theme) && file_exists(getenv('HOME').'/.dossier/tpl/'.$theme.'/'.$file)) {
+                return getenv('HOME').'/.dossier/tpl/'.$theme.'/'.$file;
+            }
         }
         return DOSSIER_ROOT.'/app/tpl/'.$theme.'/'.$file;
     }
@@ -143,16 +145,23 @@ class TemplateService
         $this->theme = $theme;
         
         $loaders = array();
-        if (getenv('DOSSIER_THEME_DIR') && is_dir(getenv('DOSSIER_THEME_DIR').'/'.$theme)) {
-            $loaders[] = new \Twig_Loader_Filesystem(getenv('DOSSIER_THEME_DIR').'/'.$theme);
-        }
-        if (is_dir(getenv('HOME').'/.dossier/tpl/'.$theme)) {
-            $loaders[] = new \Twig_Loader_Filesystem(getenv('HOME').'/.dossier/tpl/'.$theme);
+        if (getenv('APP_ENV') == 'prod') {
+            if (getenv('DOSSIER_THEME_DIR') && is_dir(getenv('DOSSIER_THEME_DIR').'/'.$theme)) {
+                $loaders[] = new \Twig_Loader_Filesystem(getenv('DOSSIER_THEME_DIR').'/'.$theme);
+            }
+            if (is_dir(getenv('HOME').'/.dossier/tpl/'.$theme)) {
+                $loaders[] = new \Twig_Loader_Filesystem(getenv('HOME').'/.dossier/tpl/'.$theme);
+            }
         }
         $loaders[] = new \Twig_Loader_Filesystem(DOSSIER_ROOT.'/app/tpl/'.$theme);
         
+        $cache = false;
+        if (getenv('APP_ENV') == 'prod') {
+            $cache = new \Twig_Cache_Filesystem(DOSSIER_CACHE, \Twig_Cache_Filesystem::FORCE_BYTECODE_INVALIDATION);
+        }
+        
         $this->twig = new \Twig_Environment(new \Twig_Loader_Chain($loaders), array(
-            'cache' => new \Twig_Cache_Filesystem(DOSSIER_CACHE, \Twig_Cache_Filesystem::FORCE_BYTECODE_INVALIDATION),
+            'cache' => $cache,
             'debug' => getenv('APP_DEBUG'),
         ));
         $this->addTwigExtensions($this->translator->getTranslator(), $this->config);
@@ -290,7 +299,7 @@ class TemplateService
         }, array('is_safe' => array('html'))));
             
         $this->twig->addFilter(new \Twig_Filter('debug', function ($var) {
-            return getenv('APP_DEBUG') == true ? '<code>'.print_r($var, true).'</code>' : '';
+            return getenv('APP_DEBUG') == true || getenv('APP_ENV') == 'dev' ? '<code>'.print_r($var, true).'</code>' : '';
         }, array('is_safe' => array('html'))));
                 
         $this->twig->addFunction(new \Twig_Function('is_today', function (\DateTime $checkDate) {
