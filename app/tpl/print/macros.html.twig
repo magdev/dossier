@@ -19,6 +19,14 @@
     {% endfor %}
 {% endmacro %}
 
+{% macro list_projects(projects, tag) %}
+    {% set tag = tag|default('li') %}
+    {% for project in projects %}
+        <{{ tag }}><em>{{ project.name }}:</em>
+        {{ project.shortDescription }}</{{ tag }}>
+    {% endfor %}
+{% endmacro %}
+
 
 {% macro list_link_array(entries, tag) %}
     {% set tag = tag|default('li') %}

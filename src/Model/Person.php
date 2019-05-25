@@ -132,12 +132,6 @@ final class Person extends BaseModel implements PhotoInterface, AnalyzableInterf
      */
     protected $interests = array();
     
-    /**
-     * Current Projects
-     * @var array
-     */
-    protected $projects = array();
-    
     
     /**
      * Constructor
@@ -309,17 +303,6 @@ final class Person extends BaseModel implements PhotoInterface, AnalyzableInterf
     public function getInterests(): array
     {
         return $this->interests;
-    }
-    
-    
-    /**
-     * Get current projects
-     *
-     * @return array
-     */
-    public function getProjects(): array
-    {
-        return $this->projects;
     }
     
     

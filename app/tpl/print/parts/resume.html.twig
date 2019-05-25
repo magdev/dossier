@@ -115,11 +115,11 @@
                     {{ macros.list_references(person.references) }}
                 </ul>
             {% endif %}
-
-            {% if person.projects|length > 0 %}
+            
+            {% if projects|length > 0 %}
                 <h3>{{ 'resume.headers.current_projects'|trans }}</h3>
                 <ul>
-                    {{ macros.list_simple_array(person.projects) }}
+                    {{ macros.list_projects(projects) }}
                 </ul>
             {% endif %}
 
