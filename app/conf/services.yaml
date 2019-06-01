@@ -19,6 +19,10 @@ services:
         class: '\Magdev\Dossier\Service\MinifierService'
         arguments: ['@monolog']
         
+    git:
+        class: '\Magdev\Dossier\Service\GitService'
+        arguments: ['@config', '@monolog']
+        
     translator:
         class: '\Magdev\Dossier\Service\TranslatorService'
         arguments: ['@config', '@monolog']
