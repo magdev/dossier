@@ -2,7 +2,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2018 magdev
+ * Copyright (c) 2019 magdev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,69 +23,69 @@
  * THE SOFTWARE.
  *
  * @author    magdev
- * @copyright 2018 Marco Grätsch
+ * @copyright 2019 Marco Grätsch
  * @package   magdev/dossier
  * @license   http://opensource.org/licenses/MIT MIT License
  */
  
-namespace Magdev\Dossier\Model\Person;
-
-use Magdev\Dossier\Model\Traits\ToggableTrait;
+namespace Magdev\Dossier\Model\Traits;
 
 /**
- * Contact model
+ * Trait for objects which can be de-/activated
  * 
  * @author magdev
  */
-class Contact 
+trait ToggableTrait
 {
-    use ToggableTrait;
-    
     /**
-     * Contact address
-     * @var string
+     * @var bool
      */
-    protected $address = '';
-    
-    /**
-     * Contact type
-     * @var string
-     */
-    protected $type = '';
+    protected $active = true;
     
     
     /**
-     * Constructor
+     * Activate object
      * 
-     * @param string $address
-     * @param string $type
-     * @param bool $active
+     * @return self
      */
-    public function __construct(string $address, string $type, ?bool $active = true)
+    public function activate(): self
     {
-        $this->address = $address;
-        $this->type = $type;
-        $this->active = $active;
+        $this->active = true;
+        return self;
     }
     
     
     /**
-     * Get the contact type
-     * @return string
+     * Deactivate object
+     * 
+     * @return self
      */
-    public function getType(): string
+    public function deactivate(): self
     {
-        return $this->type;
+        $this->active = false;
+        return $this;
     }
     
     
     /**
-     * Get the contact address
-     * @return string
+     * Toggle current activation status
+     * 
+     * @return self
      */
-    public function getAddress(): string
+    public function toggle(): self
     {
-        return $this->address;
+        $this->active = !$this->active;
+        return $this;
+    }
+    
+    
+    /**
+     * Check if object is activated
+     * 
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->active;
     }
 }
-

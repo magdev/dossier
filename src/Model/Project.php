@@ -31,6 +31,7 @@
 namespace Magdev\Dossier\Model;
 
 use Magdev\Dossier\Model\Base\BaseModel;
+use Magdev\Dossier\Model\Traits\ToggableTrait;
 use Mni\FrontYAML\Document;
 
 /**
@@ -40,6 +41,8 @@ use Mni\FrontYAML\Document;
  */
 class Project extends BaseModel
 {
+    use ToggableTrait;
+    
     /**
      * Project name
      * @var string

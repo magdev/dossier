@@ -108,7 +108,10 @@ class MarkdownService
         foreach ($files as $file) {
             /* @var $file \SplFileInfo */
             $document = $this->getDocument($file->getPathname());
-            $cv->append(new CurriculumVitae\Entry($document));
+            $entry = new CurriculumVitae\Entry($document);
+            if ($entry->isActive()) {
+                $cv->append($entry);
+            }
         }
         $cv->setSortDirection($sort)->sort();
         
@@ -117,7 +120,10 @@ class MarkdownService
         foreach ($files as $file) {
             /* @var $file \SplFileInfo */
             $document = $this->getDocument($file->getPathname());
-            $projects->append(new Project($document));
+            $project = new Project($document);
+            if ($project->isActive()) {
+                $projects->append($project);
+            }
         }
         
         

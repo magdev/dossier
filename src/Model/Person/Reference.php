@@ -31,6 +31,7 @@
 namespace Magdev\Dossier\Model\Person;
 
 use Magdev\Dossier\Model\Base\BaseModel;
+use Magdev\Dossier\Model\Traits\ToggableTrait;
 
 /**
  * Model for job references
@@ -39,6 +40,8 @@ use Magdev\Dossier\Model\Base\BaseModel;
  */
 class Reference extends BaseModel
 {
+    use ToggableTrait;
+    
     /**
      * Reference description
      * @var string

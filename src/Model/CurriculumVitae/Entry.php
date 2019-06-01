@@ -32,6 +32,7 @@ namespace Magdev\Dossier\Model\CurriculumVitae;
 
 use Magdev\Dossier\Model\AbstractModel;
 use Magdev\Dossier\Model\Traits\PhotoTrait;
+use Magdev\Dossier\Model\Traits\ToggableTrait;
 use Mni\FrontYAML\Document;
 use Magdev\Dossier\Model\Base\BaseModel;
 use Magdev\Dossier\Analyzer\Base\AnalyzableInterface;
@@ -46,6 +47,7 @@ use Magdev\Dossier\Model\Base\PhotoInterface;
 final class Entry extends BaseModel implements PhotoInterface, AnalyzableInterface
 {
     use PhotoTrait;
+    use ToggableTrait;
     
     /**
      * Start date

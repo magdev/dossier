@@ -371,7 +371,10 @@ final class Person extends BaseModel implements PhotoInterface, AnalyzableInterf
                 foreach ($value as $type => $address) {
                     if ($type == 'accounts' && is_array($address)) {
                         foreach ($address as $a) {
-                            $this->contacts->append(new Contact($a['address'], $a['type']));
+                            $contact = new Contact($a['address'], $a['type'], $a['active']);
+                            if ($contact->isActive()) {
+                                $this->contacts->append($contact);
+                            }
                         }
                     } else {
                         $this->contacts->append(new Contact($address, $type));
@@ -379,7 +382,10 @@ final class Person extends BaseModel implements PhotoInterface, AnalyzableInterf
                 }
             } else if ($key == 'references') {
                 foreach ($value as $reference) {
-                    $this->references->append(new Reference($reference));
+                    $ref = new Reference($reference);
+                    if ($ref->isActive()) {
+                        $this->references->append($ref);
+                    }
                 }
             } else {
                 $this->setProperty($key, $value);
