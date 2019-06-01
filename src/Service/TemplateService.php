@@ -214,9 +214,6 @@ class TemplateService
      */
     public function render(string $template, DataCollectorInterface $data, string $destDir): string
     {
-        if (!is_dir($destDir)) {
-            mkdir($destDir, 0755, true);
-        }
         $vars = $data->getData();
         $name = isset($vars['name']) ? $vars['name'] : $this->docname;
         $name .= isset($vars['theme']) ? '.'.$vars['theme'] : '';
@@ -224,6 +221,10 @@ class TemplateService
         
         $html = $this->twig->render($template, $vars);
         $html = $this->minifier->minify($html);
+        
+        if (!is_dir(dirname($path))) {
+            mkdir(dirname($path), 0755, true);
+        }
         if (!file_put_contents($path, $html)) {
             throw new \RuntimeException('Error writing output file: '.$path);
         }
