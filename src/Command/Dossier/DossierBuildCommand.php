@@ -62,7 +62,7 @@ final class DossierBuildCommand extends BaseCommand
             ->addOption('locale', 'l', InputOption::VALUE_OPTIONAL, 'Set the locale', 'de')
             ->addOption('sort', 's', InputOption::VALUE_OPTIONAL, 'Set the sort direction for the CV', CurriculumVitae::SORT_DESC)
             ->addOption('theme', 't', InputOption::VALUE_OPTIONAL, 'Select the theme', 'print')
-            ->addOption('docname', 'd', InputOption::VALUE_OPTIONAL, 'Set the name for the output document (w/o extension)', 'dossier')
+            ->addOption('docname', 'd', InputOption::VALUE_OPTIONAL, 'Set the name for the output document (w/o extension)', '')
             
             ->addOption('no-cover', null, InputOption::VALUE_NONE, 'Suppress the cover')
             ->addOption('no-intro', null, InputOption::VALUE_NONE, 'Suppress the introduction')
@@ -97,11 +97,12 @@ final class DossierBuildCommand extends BaseCommand
         $cssproc = $this->getService('cssproc');
         /* @var $cssroc \Magdev\Dossier\Service\StylesheetProcessorService */
         
+        $name = $input->getOption('docname') ?: $this->getService('git')->getCurrentBranchName();
         try {
             $data = new DataCollector(array(
                 'disabled' => $this->getHelper('section_manager')->getDisabledSections($input),
                 'theme' => $input->getOption('theme'),
-                'name' => $input->getOption('docname'),
+                'name' => ($name ?: 'dossier'),
                 'tags' => $this->config->get('cv.tags'),
                 'locale' => $this->translator->getTranslator()->getLocale(),
                 'stylesheet' => $cssproc->parseThemeStyles(),

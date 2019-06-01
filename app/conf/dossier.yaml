@@ -1,5 +1,6 @@
 ### Settings file for magdev/dossier
 charset: utf-8
+docname: dossier
 
 # Date formats
 date:
