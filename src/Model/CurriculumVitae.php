@@ -198,7 +198,7 @@ class CurriculumVitae extends BaseCollection
         
         $formatter = $this->formatter;
         array_walk($result, function(int &$seconds, string $key) use ($formatter) {
-            $seconds = $formatter->formatExperience($seconds);
+            $seconds = $formatter->formatYearMonthDuration($seconds);
         });
         return $result;
     }
