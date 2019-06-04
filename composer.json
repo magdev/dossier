@@ -39,7 +39,7 @@
 		"erusev/parsedown-extra" : "^0.7.1",
 		"leafo/scssphp" : "^0.7.6",
 		"adbario/php-dot-notation" : "^2.0",
-		"magdev/console-form" : "^0.0.7@master",
+		"magdev/console-form" : "^0.0.7",
 		"monolog/monolog" : "^1.23",
 		"pdfshift/pdfshift-php" : "~1.0.2",
 		"raivisdejus/html-minifier" : "~0.5"
@@ -73,5 +73,6 @@
 			"url" : "https://github.com/magdev/console-form.git",
 			"name" : "magdev/console-form"
 		}
-	]
+	],
+	"minimum-stability" : "dev"
 }
