@@ -1,6 +1,14 @@
 ### Settings file for magdev/dossier
 charset: utf-8
-docname: dossier
+
+# Output settings
+output:
+  path: _output
+  docname: dossier
+
+# Theme settings
+theme:
+  start_template: document.html.twig
 
 # Date formats
 date:

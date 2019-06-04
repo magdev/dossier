@@ -82,7 +82,7 @@ class GitService
     public function getCurrentBranchName(): string
     {
         if (!$this->isGitRepository()) {
-            return $this->config->get('docname');
+            return $this->config->get('output.docname');
         }
         $output = $this->exec('git branch | grep \\\* | cut -d \' \' -f2');
         return $output[0];
