@@ -129,7 +129,7 @@ final class Entry extends BaseModel implements PhotoInterface, AnalyzableInterfa
 
 
     /**
-     * Constrctor
+     * Constructor
      *
      * @param \Mni\FrontYAML\Document $document
      */
