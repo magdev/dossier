@@ -30,14 +30,8 @@
  
 namespace Magdev\Dossier\Service;
 
-// git branch | grep \* | cut -d ' ' -f2
-
 class GitService
 {
-    const MODE_OUTPUT = 1;
-    const MODE_RETURN = 2;
-    const MODE_LASTLINE = 3;
-    
     /**
      * Configuration service
      * @var \Magdev\Dossier\Service\ConfigService
@@ -50,17 +44,25 @@ class GitService
      */
     protected $logger = null;
     
+    /**
+     * System service
+     * @var \Magdev\Dossier\Service\SystemService
+     */
+    protected $system = null;
+    
     
     /**
      * Constructor
      *
      * @param \Magdev\Dossier\Service\ConfigService $config
      * @param \Magdev\Dossier\Service\MonologService $logger
+     * @param \Magdev\Dossier\Service\SystemService $system
      */
-    public function __construct(ConfigService $config, MonologService $logger)
+    public function __construct(ConfigService $config, MonologService $logger, SystemService $system)
     {
         $this->config = $config;
         $this->logger = $logger;
+        $this->system = $system;
     }
     
     
@@ -72,7 +74,7 @@ class GitService
     public function init(): bool
     {
         if (!$this->isGitRepository()) {
-            $this->exec('git init');
+            $this->system->exec('git init');
         }
         return $this->isGitRepository();
     }
@@ -88,7 +90,7 @@ class GitService
         if (!$this->isGitRepository()) {
             return $this->config->get('output.docname');
         }
-        return $this->exec('git branch | grep \\\* | cut -d \' \' -f2', self::MODE_LASTLINE);
+        return $this->system->exec('git branch | grep \\\* | cut -d \' \' -f2', self::MODE_LASTLINE);
     }
     
     
@@ -100,26 +102,5 @@ class GitService
     public function isGitRepository(): bool
     {
         return is_dir(PROJECT_ROOT.'/.git') && file_exists(PROJECT_ROOT.'/.git/HEAD');
-    }
-    
-    
-    /**
-     * Execute a system command
-     * 
-     * @param string $cmd
-     * @param int $mode
-     * @param array $output
-     * @param int $return
-     * @return string|int|array
-     */
-    protected function exec(string $cmd, int $mode = self::MODE_OUTPUT, &$output = array(), int &$return = 0)
-    {
-        $lastline = exec($cmd, $output, $return);
-        switch ($mode) {
-            case self::MODE_LASTLINE:   return $lastline;
-            case self::MODE_RETURN:     return $return;
-            default:
-            case self::MODE_OUTPUT:     return $output;
-        }
     }
 }
