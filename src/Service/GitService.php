@@ -34,6 +34,10 @@ namespace Magdev\Dossier\Service;
 
 class GitService
 {
+    const MODE_OUTPUT = 1;
+    const MODE_RETURN = 2;
+    const MODE_LASTLINE = 3;
+    
     /**
      * Configuration service
      * @var \Magdev\Dossier\Service\ConfigService
@@ -84,8 +88,7 @@ class GitService
         if (!$this->isGitRepository()) {
             return $this->config->get('output.docname');
         }
-        $output = $this->exec('git branch | grep \\\* | cut -d \' \' -f2');
-        return $output[0];
+        return $this->exec('git branch | grep \\\* | cut -d \' \' -f2', self::MODE_LASTLINE);
     }
     
     
@@ -96,7 +99,7 @@ class GitService
      */
     public function isGitRepository(): bool
     {
-        return is_dir(PROJECT_ROOT.'/.git') && file_exists(PROJECT_ROOT.'/.git/config');
+        return is_dir(PROJECT_ROOT.'/.git') && file_exists(PROJECT_ROOT.'/.git/HEAD');
     }
     
     
@@ -104,12 +107,19 @@ class GitService
      * Execute a system command
      * 
      * @param string $cmd
-     * @return array
+     * @param int $mode
+     * @param array $output
+     * @param int $return
+     * @return string|int|array
      */
-    protected function exec(string $cmd): array
+    protected function exec(string $cmd, int $mode = self::MODE_OUTPUT, &$output = array(), int &$return = 0)
     {
-        $output = array();
-        exec($cmd, $output);
-        return $output;
+        $lastline = exec($cmd, $output, $return);
+        switch ($mode) {
+            case self::MODE_LASTLINE:   return $lastline;
+            case self::MODE_RETURN:     return $return;
+            default:
+            case self::MODE_OUTPUT:     return $output;
+        }
     }
 }
