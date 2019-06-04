@@ -18,6 +18,7 @@
 			"Magdev\\DossierTests\\" : "tests"
 		}
 	},
+	"minimum-stability" : "stable",
 	"require" : {
 		"php" : "~7.2",
 		"ext-phar" : "*",
@@ -67,12 +68,5 @@
 				]
 			}
 		}
-	},
-	"repositories" : [{
-			"type" : "git",
-			"url" : "https://github.com/magdev/console-form.git",
-			"name" : "magdev/console-form"
-		}
-	],
-	"minimum-stability" : "stable"
+	}
 }
