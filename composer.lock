@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f336e94567aa544f8805c58f48bbe170",
+    "content-hash": "b7003a9ed5c6e500a8bfcc787c9e07e4",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -202,8 +202,8 @@
             "version": "0.0.7",
             "source": {
                 "type": "git",
-                "url": "magdev@localhost:/home/magdev/local/git/console-form/",
-                "reference": "91ed4ed9296e0024441043be059846a86c72a1b9"
+                "url": "https://github.com/magdev/console-form.git",
+                "reference": "8d903fa2d591827870f52dc1a382f642a49fe830"
             },
             "require": {
                 "php": ">=5.4",
@@ -3166,7 +3166,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "magdev/console-form": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
