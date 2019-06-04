@@ -70,7 +70,7 @@
 	},
 	"repositories" : [{
 			"type" : "git",
-			"url" : "git@github.com:magdev/console-form.git",
+			"url" : "ssh://git@black-pearl.local:3022/magdev/console-form.git",
 			"name" : "magdev/console-form"
 		}
 	]
