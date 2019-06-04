@@ -1,7 +1,7 @@
 {
 	"name" : "magdev/dossier",
 	"type" : "project",
-	"description" : "Create your dossier from Markdown files",
+	"description" : "Create a personal dossier from Markdown files",
 	"license" : "MIT",
 	"authors" : [{
 			"name" : "Marco Grätsch",
@@ -11,6 +11,11 @@
 	"autoload" : {
 		"psr-4" : {
 			"Magdev\\Dossier\\" : "src"
+		}
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"Magdev\\DossierTests\\" : "tests"
 		}
 	},
 	"require" : {
@@ -39,6 +44,10 @@
 		"pdfshift/pdfshift-php" : "~1.0.2",
 		"raivisdejus/html-minifier" : "~0.5"
 	},
+	"require-dev" : {
+		"wapmorgan/php-code-analyzer" : "^1.0",
+		"phpunit/phpunit" : "~8.1"
+	},
 	"config" : {
 		"bin-dir" : "bin"
 	},
@@ -64,8 +73,5 @@
 			"url" : "git@github.com:magdev/console-form.git",
 			"name" : "magdev/console-form"
 		}
-	],
-	"require-dev" : {
-		"wapmorgan/php-code-analyzer" : "^1.0"
-	}
+	]
 }

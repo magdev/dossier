@@ -1,0 +1,17 @@
+<phpunit 
+    backupGlobals="false"
+    backupStaticAttributes="false"
+    bootstrap="src/bootstrap.php"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    processIsolation="false"
+    stopOnFailure="false">
+
+  <testsuites>
+    <testsuite name="dossier">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>
