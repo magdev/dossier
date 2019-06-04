@@ -106,10 +106,8 @@ class DossierStatusCommand extends BaseCommand
         foreach ($files as $file) {
             /* @var $file \SplFileInfo */
             $document = $markdown->getDocument($file->getPathname());
-            $sortValue = str_replace('-', '', $document->getYAML()['start_date']);
-            
             $entry = new Entry($document);
-            $status[$sortValue] = array(get_class($entry), 'cv/'.$file->getFilename(), 
+            $status[$entry->getStartDate()->format('Ymd')] = array(get_class($entry), 'cv/'.$file->getFilename(), 
                 $this->io->align($this->io->bool($entry->useInResume()), 9, DossierStyle::ALIGN_CENTER), 
                 $this->io->align($this->io->percent($analyzer->analyze($entry), $thresholds), 6, DossierStyle::ALIGN_RIGHT)
             );
