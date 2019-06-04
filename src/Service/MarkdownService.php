@@ -104,7 +104,7 @@ class MarkdownService
         $intro = new Intro($this->getDocument(PROJECT_ROOT.'/intro.md'));
         
         $cv = new CurriculumVitae($this->formatter);
-        $files = new \FilesystemIterator(PROJECT_ROOT.'/cv');
+        $files = new \FilesystemIterator(PROJECT_ROOT.'/cv', \FilesystemIterator::SKIP_DOTS);
         foreach ($files as $file) {
             /* @var $file \SplFileInfo */
             $document = $this->getDocument($file->getPathname());

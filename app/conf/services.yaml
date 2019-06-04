@@ -6,6 +6,9 @@ services:
 
     config:
         class: '\Magdev\Dossier\Service\ConfigService'
+
+    system:
+        class: '\Magdev\Dossier\Service\SystemService'
         
     monolog:
         class: '\Magdev\Dossier\Service\MonologService'
@@ -21,7 +24,7 @@ services:
         
     git:
         class: '\Magdev\Dossier\Service\GitService'
-        arguments: ['@config', '@monolog']
+        arguments: ['@config', '@monolog', '@system']
         
     translator:
         class: '\Magdev\Dossier\Service\TranslatorService'

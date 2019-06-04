@@ -27,18 +27,9 @@
  * @package   magdev/dossier
  * @license   http://opensource.org/licenses/MIT MIT License
  */
-declare(strict_types=1);
 
-define('DOSSIER_ROOT', dirname(__DIR__));
-define('DOSSIER_CACHE', getenv('HOME').'/.dossier/cache');
-define('PROJECT_ROOT', getcwd());
+require(dirname(__DIR__).'/src/bootstrap.php');
 define('DOSSIER_LOGO', 'DQogX19fX19fX18gICAgICAgICAgICAgICAgICAgICAgLl9fICAgICAgICAgICAgICANCiBcX19fX19fIFwgICBfX19fICBfX19fX18gX19fX198X198IF9fX19fX19fX19fIA0KICB8ICAgIHwgIFwgLyAgXyBcLyAgX19fLy8gIF9fXy8gIHwvIF9fIFxfICBfXyBcDQogIHwgICAgYCAgICggIDxfPiApX19fIFwgXF9fXyBcfCAgXCAgX19fL3wgIHwgXC8NCiAvX19fX19fXyAgL1xfX19fL19fX18gID5fX19fICA+X198XF9fXyAgPl9ffCAgIA0KICAgICAgICAgXC8gICAgICAgICAgIFwvICAgICBcLyAgICAgICAgXC8gICAgICAgDQo=');
-
-if (!is_dir(DOSSIER_CACHE)) {
-    mkdir(DOSSIER_CACHE, 0700, true);
-}
-
-require DOSSIER_ROOT.'/vendor/autoload.php';
 
 use Magdev\Dossier\Application;
 use Magdev\Dossier\Command;

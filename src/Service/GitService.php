@@ -30,8 +30,6 @@
  
 namespace Magdev\Dossier\Service;
 
-// git branch | grep \* | cut -d ' ' -f2
-
 class GitService
 {
     /**
@@ -46,17 +44,25 @@ class GitService
      */
     protected $logger = null;
     
+    /**
+     * System service
+     * @var \Magdev\Dossier\Service\SystemService
+     */
+    protected $system = null;
+    
     
     /**
      * Constructor
      *
      * @param \Magdev\Dossier\Service\ConfigService $config
      * @param \Magdev\Dossier\Service\MonologService $logger
+     * @param \Magdev\Dossier\Service\SystemService $system
      */
-    public function __construct(ConfigService $config, MonologService $logger)
+    public function __construct(ConfigService $config, MonologService $logger, SystemService $system)
     {
         $this->config = $config;
         $this->logger = $logger;
+        $this->system = $system;
     }
     
     
@@ -68,7 +74,7 @@ class GitService
     public function init(): bool
     {
         if (!$this->isGitRepository()) {
-            $this->exec('git init');
+            $this->system->exec('git init');
         }
         return $this->isGitRepository();
     }
@@ -84,8 +90,7 @@ class GitService
         if (!$this->isGitRepository()) {
             return $this->config->get('output.docname');
         }
-        $output = $this->exec('git branch | grep \\\* | cut -d \' \' -f2');
-        return $output[0];
+        return $this->system->exec('git branch | grep \\\* | cut -d \' \' -f2', self::MODE_LASTLINE);
     }
     
     
@@ -96,20 +101,6 @@ class GitService
      */
     public function isGitRepository(): bool
     {
-        return is_dir(PROJECT_ROOT.'/.git') && file_exists(PROJECT_ROOT.'/.git/config');
-    }
-    
-    
-    /**
-     * Execute a system command
-     * 
-     * @param string $cmd
-     * @return array
-     */
-    protected function exec(string $cmd): array
-    {
-        $output = array();
-        exec($cmd, $output);
-        return $output;
+        return is_dir(PROJECT_ROOT.'/.git') && file_exists(PROJECT_ROOT.'/.git/HEAD');
     }
 }

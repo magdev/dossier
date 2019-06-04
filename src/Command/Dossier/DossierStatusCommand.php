@@ -102,17 +102,17 @@ class DossierStatusCommand extends BaseCommand
         );
         $status[] = new TableSeparator();
         
-        $files = new \FilesystemIterator(PROJECT_ROOT.'/cv');
+        $files = new \FilesystemIterator(PROJECT_ROOT.'/cv', \FilesystemIterator::SKIP_DOTS);
         foreach ($files as $file) {
             /* @var $file \SplFileInfo */
             $document = $markdown->getDocument($file->getPathname());
             $entry = new Entry($document);
-            $status[] = array(get_class($entry), 'cv/'.$file->getFilename(), 
+            $status[$entry->getStartDate()->format('Ymd')] = array(get_class($entry), 'cv/'.$file->getFilename(), 
                 $this->io->align($this->io->bool($entry->useInResume()), 9, DossierStyle::ALIGN_CENTER), 
                 $this->io->align($this->io->percent($analyzer->analyze($entry), $thresholds), 6, DossierStyle::ALIGN_RIGHT)
             );
         }
-        
+        ksort($status);
         $this->io->table(array('Model', 'File', 
             $this->io->align('In Resume', 9), 
             $this->io->align('Status', 6, DossierStyle::ALIGN_RIGHT)
