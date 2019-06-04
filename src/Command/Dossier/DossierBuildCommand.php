@@ -40,6 +40,7 @@ use Magdev\Dossier\Model\Intro;
 use Magdev\Dossier\Model\Letter;
 use Magdev\Dossier\Command\Base\BaseCommand;
 use Magdev\Dossier\Util\DataCollector;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Generate your dossier
@@ -62,6 +63,7 @@ final class DossierBuildCommand extends BaseCommand
             ->addOption('locale', 'l', InputOption::VALUE_OPTIONAL, 'Set the locale', 'de')
             ->addOption('sort', 's', InputOption::VALUE_OPTIONAL, 'Set the sort direction for the CV', CurriculumVitae::SORT_DESC)
             ->addOption('theme', 't', InputOption::VALUE_OPTIONAL, 'Select the theme', 'print')
+            ->addOption('start-template', 'i', InputOption::VALUE_OPTIONAL, 'The name of the start-template', '')
             ->addOption('docname', 'd', InputOption::VALUE_OPTIONAL, 'Set the name for the output document (w/o extension)', '')
             
             ->addOption('no-cover', null, InputOption::VALUE_NONE, 'Suppress the cover')
@@ -97,6 +99,7 @@ final class DossierBuildCommand extends BaseCommand
         $cssproc = $this->getService('cssproc');
         /* @var $cssroc \Magdev\Dossier\Service\StylesheetProcessorService */
         
+        $startTemplate = $input->getOption('start-template') ?: $this->config->get('theme.start_template');
         $name = $input->getOption('docname') ?: $this->getService('git')->getCurrentBranchName();
         try {
             $data = new DataCollector(array(
@@ -113,7 +116,7 @@ final class DossierBuildCommand extends BaseCommand
             $models = $this->getService('markdown')->getFileSet($input->getOption('sort'));
             $data->merge($models);
     
-            $outputFile = $tpl->render('document.html.twig', $data, PROJECT_ROOT.'/_output');
+            $outputFile = $tpl->render($startTemplate, $data, PROJECT_ROOT.'/'.$this->config->get('output.path'));
             if ($input->getOption('pdf')) {
                 $outputFile = $this->getService('pdf')->createPdf($outputFile);
             }
