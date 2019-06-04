@@ -2,7 +2,36 @@
 <project name="dossier" default="help" basedir=".">
     <property file="${project.basedir}/build.properties" />
     
+
     <target name="help">
-        <echo msg="Bootstrapped!" />
+        <echo>dossier.phar buildfile for Phing</echo>
+    </target>
+        
+    <target name="prepare">
+        <mkdir dir="${release.dir}" />
+        <mkdir dir="${report.dir}" />
+    </target>
+    
+
+    <target name="test" depends="prepare">
+        <echo>Running Tests</echo>
+        <phpunit pharlocation="${project.bindir}/phpunit" configuration="${project.dir}/phpunit.xml">
+            <formatter todir="${report.dir}" type="${report.format}"/>
+        </phpunit>
+    </target>
+
+    <target name="build" depends="test">
+        <echo>Building PHAR</echo>
+        <pharpackage destfile="${release.dir}/${project.name}.phar" 
+            basedir="${project.dir}"
+            compression="bzip2"
+            clistub="bin/dossier.php">
+            <fileset dir="${project.dir}">
+                <include name="app/**" />
+                <include name="src/**" />
+                <include name="bin/dossier.php" />
+                <include name="vendor/**" />
+            </fileset>
+        </pharpackage>
     </target>
 </project>
