@@ -47,7 +47,8 @@
 	},
 	"require-dev" : {
 		"wapmorgan/php-code-analyzer" : "^1.0",
-		"phpunit/phpunit" : "~8.1"
+		"phpunit/phpunit" : "~8.1",
+		"phing/phing" : "~2.16"
 	},
 	"config" : {
 		"bin-dir" : "bin"
