@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b7003a9ed5c6e500a8bfcc787c9e07e4",
+    "content-hash": "62e2eefeba07c02c71eae7348eb04be8",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -1151,7 +1151,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
