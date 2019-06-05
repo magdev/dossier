@@ -46,7 +46,7 @@ class SystemService
      * @param int $return
      * @return string|int|array
      */
-    protected function exec(string $cmd, int $mode = self::MODE_OUTPUT, &$output = array(), int &$return = 0)
+    public function exec(string $cmd, int $mode = self::MODE_OUTPUT, &$output = array(), int &$return = 0)
     {
         $lastline = exec($cmd, $output, $return);
         switch ($mode) {

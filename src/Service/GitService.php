@@ -90,7 +90,7 @@ class GitService
         if (!$this->isGitRepository()) {
             return $this->config->get('output.docname');
         }
-        return $this->system->exec('git branch | grep \\\* | cut -d \' \' -f2', self::MODE_LASTLINE);
+        return $this->system->exec('git branch | grep \\\* | cut -d \' \' -f2', SystemService::MODE_LASTLINE);
     }
     
     
