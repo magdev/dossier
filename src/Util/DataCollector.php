@@ -97,7 +97,7 @@ class DataCollector implements DataCollectorInterface
      */
     public function hasData(): bool
     {
-        return sizeof($this->data) > o ? true : false;
+        return sizeof($this->data) > 0 ? true : false;
     }
     
     
