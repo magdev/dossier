@@ -28,7 +28,7 @@
  * @license   http://opensource.org/licenses/MIT MIT License
  */
  
-namespace Magdev\Dossier\Command\Person;
+namespace Magdev\Dossier\Command\Create;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -37,7 +37,7 @@ use Symfony\Component\Console\Exception\RuntimeException;
 use Droath\ConsoleForm\Exception\FormException;
 use Magdev\Dossier\Command\Base\BaseCommand;
 
-final class PersonAddCommand extends BaseCommand
+final class CreateIntroCommand extends BaseCommand
 {
     /**
      * The IntroForm 
@@ -52,8 +52,8 @@ final class PersonAddCommand extends BaseCommand
      */
     protected function configure()
     {
-        $this->setName('person:add')
-            ->setDescription('Write the Person page')
+        $this->setName('create:intro')
+            ->setDescription('Write the Intro page')
             ->addOption('review', 'r', InputOption::VALUE_NONE, 'Review file in editor');
         
         parent::configure();
@@ -68,9 +68,13 @@ final class PersonAddCommand extends BaseCommand
     {
         parent::initialize($input, $output);
         
+        if (file_exists(PROJECT_ROOT.'/intro.md')) {
+            throw new \RuntimeException('File intro.md already exists');
+        }
+        
         try {
             $this->form = $this->getHelper('form')
-                ->getFormByName('form.person', $input, $output);
+                ->getFormByName('form.intro', $input, $output);
         } catch (FormException $fe) {
             throw new RuntimeException(get_class($fe).': '.$fe->getMessage(), $fe->getCode(), $fe);
         }
@@ -83,7 +87,7 @@ final class PersonAddCommand extends BaseCommand
      */
     protected function interact(InputInterface $input, OutputInterface $output)
     {
-        $this->io->title($this->translator->trans('form.person.header.add'));
+        $this->io->title('<info> '.$this->translator->trans('form.intro.header.add').'</>');
         $this->io->newLine();
         $this->form->process();
     }
@@ -102,13 +106,13 @@ final class PersonAddCommand extends BaseCommand
             try {
                 $text = $this->form->stripData('text', '');
                 
-                $markdown->save(PROJECT_ROOT.'/person.md', $this->form->getResults(), $text, false);
+                $markdown->save(PROJECT_ROOT.'/intro.md', $this->form->getResults(), $text, false);
                 $this->io->success($this->translator->trans('message.write.success', array(
-                    '%name%' => 'Person'
+                    '%name%' => 'Intro'
                 )));
                 
                 if ($input->getOption('review') != false) {
-                    $this->getService('uri_helper')->openFileInEditor(PROJECT_ROOT.'/person.md');
+                    $this->getService('uri_helper')->openFileInEditor(PROJECT_ROOT.'/intro.md');
                 }
             } catch (FormException $fe) {
                 throw new RuntimeException(get_class($fe).': '.$fe->getMessage(), $fe->getCode(), $fe);

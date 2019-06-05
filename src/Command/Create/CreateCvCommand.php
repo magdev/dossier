@@ -28,19 +28,25 @@
  * @license   http://opensource.org/licenses/MIT MIT License
  */
  
-namespace Magdev\Dossier\Command\Intro;
+namespace Magdev\Dossier\Command\Create;
 
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Droath\ConsoleForm\Exception\FormException;
 use Magdev\Dossier\Command\Base\BaseCommand;
 
-final class IntroAddCommand extends BaseCommand
+/**
+ * Write a new CV entry
+ *
+ * @author magdev
+ */
+final class CreateCvCommand extends BaseCommand
 {
     /**
-     * The IntroForm 
+     * TheCV Form
      * @var \Magdev\Dossier\Form\Extension\Form
      */
     protected $form = null;
@@ -52,8 +58,9 @@ final class IntroAddCommand extends BaseCommand
      */
     protected function configure()
     {
-        $this->setName('intro:add')
-            ->setDescription('Write the Intro page')
+        $this->setName('create:cv')
+            ->setDescription('Write a new CV entry')
+            ->addArgument('name', InputArgument::REQUIRED, 'Choose the name of the entry')
             ->addOption('review', 'r', InputOption::VALUE_NONE, 'Review file in editor');
         
         parent::configure();
@@ -66,16 +73,18 @@ final class IntroAddCommand extends BaseCommand
      */
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        parent::initialize($input, $output);
+        $name = $input->getArgument('name');
+        if (file_exists(PROJECT_ROOT.'/cv/'.$name.'.md')) {
+            throw new \RuntimeException('File cv/'.$name.'.md already exists');
+        }
         
         try {
-            $this->form = $this->getHelper('form')
-                ->getFormByName('form.intro', $input, $output);
+            $this->form = $this->getHelper('form')->getFormByName('form.cv', $input, $output);
+            parent::initialize($input, $output);
         } catch (FormException $fe) {
             throw new RuntimeException(get_class($fe).': '.$fe->getMessage(), $fe->getCode(), $fe);
         }
     }
-    
     
     /**
      * {@inheritDoc}
@@ -83,7 +92,7 @@ final class IntroAddCommand extends BaseCommand
      */
     protected function interact(InputInterface $input, OutputInterface $output)
     {
-        $this->io->title('<info> '.$this->translator->trans('form.intro.header.add').'</>');
+        $this->io->title($this->translator->trans('form.cv.header.add'));
         $this->io->newLine();
         $this->form->process();
     }
@@ -101,14 +110,15 @@ final class IntroAddCommand extends BaseCommand
             
             try {
                 $text = $this->form->stripData('text', '');
+                $name = $input->getArgument('name');
                 
-                $markdown->save(PROJECT_ROOT.'/intro.md', $this->form->getResults(), $text, false);
+                $markdown->save(PROJECT_ROOT.'/cv/'.$name.'.md', $this->form->getResults(), $text, false);
                 $this->io->success($this->translator->trans('message.write.success', array(
-                    '%name%' => 'Intro'
+                    '%name%' => 'CV/'.ucfirst($name)
                 )));
                 
                 if ($input->getOption('review') != false) {
-                    $this->getService('uri_helper')->openFileInEditor(PROJECT_ROOT.'/intro.md');
+                    $this->getService('uri_helper')->openFileInEditor(PROJECT_ROOT.'/cv/'.$name.'.md');
                 }
             } catch (FormException $fe) {
                 throw new RuntimeException(get_class($fe).': '.$fe->getMessage(), $fe->getCode(), $fe);
