@@ -33,6 +33,7 @@ namespace Magdev\Dossier\Model;
 use Magdev\Dossier\Model\Base\BaseModel;
 use Magdev\Dossier\Model\Traits\ToggableTrait;
 use Mni\FrontYAML\Document;
+use Magdev\Dossier\Model\Traits\PhotoTrait;
 
 /**
  * Model for projects page
@@ -42,6 +43,7 @@ use Mni\FrontYAML\Document;
 class Project extends BaseModel
 {
     use ToggableTrait;
+    use PhotoTrait;
     
     /**
      * Project name
@@ -67,10 +69,21 @@ class Project extends BaseModel
      */
     protected $stack = '';
     
+    /**
+     * Project status
+     * @var string
+     */
+    protected $status = '';
+    
 
     public function getStack(): string
     {
         return $this->stack;
+    }
+    
+    public function getStatus(): string
+    {
+        return $this->status;
     }
 
 
