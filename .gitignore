@@ -13,3 +13,4 @@ example/
 vendor/
 .env
 /.phpunit.result.cache
+/build/

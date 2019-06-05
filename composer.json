@@ -47,8 +47,7 @@
 	},
 	"require-dev" : {
 		"wapmorgan/php-code-analyzer" : "^1.0",
-		"phpunit/phpunit" : "~8.1",
-		"phing/phing" : "~2.16"
+		"phpunit/phpunit" : "~8.1"
 	},
 	"config" : {
 		"bin-dir" : "bin"
@@ -69,16 +68,5 @@
 				]
 			}
 		}
-<<<<<<< HEAD
-	},
-	"repositories" : [{
-			"type" : "git",
-			"url" : "https://github.com/magdev/console-form.git",
-			"name" : "magdev/console-form"
-		}
-	],
-	"minimum-stability" : "stable"
-=======
 	}
->>>>>>> refs/heads/master
 }
