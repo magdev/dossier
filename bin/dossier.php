@@ -52,6 +52,8 @@ $app->add(new Command\Config\ConfigUnsetCommand());
 $app->add(new Command\Cache\CacheClearCommand());
 $app->add(new Command\Server\ServerStartCommand());
 $app->add(new Command\Dev\PharExtractCommand());
-$app->run();
+
+$app->setDefaultCommand('dossier:build', false)
+    ->run();
 
 
