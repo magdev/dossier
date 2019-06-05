@@ -124,9 +124,10 @@ final class DossierInitCommand extends BaseCommand
             $formatter = $this->getHelper('formatter');
             
             $output->writeln($formatter->formatBlock(array(
-                ' $ dossier.phar add:person',
-                ' $ dossier.phar add:intro',
-                ' $ dossier.phar add:cv',
+                ' $ dossier.phar create:person',
+                ' $ dossier.phar create:intro',
+                ' $ dossier.phar create:cv',
+                ' $ dossier.phar create:project',
             ), 'cmd', true));
         }
     }
