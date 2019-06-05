@@ -1,26 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="dossier" default="help" basedir=".">
     <property file="${project.basedir}/build.properties" />
+    <autoloader autoloaderpath="${vendor.dir}/autoload.php"/>
     
 
     <target name="help">
         <echo>dossier.phar buildfile for Phing</echo>
     </target>
         
-    <target name="prepare">
+    <target name="__prepare">
+        <mkdir dir="${build.dir}" />
         <mkdir dir="${release.dir}" />
-        <mkdir dir="${report.dir}" />
+    </target>
+    
+    
+    <target name="__copy" depends="__prepare">
+        <copy todir="${build.dir}/src" preservepermissions="true">
+            <fileset dir="${project.dir}">
+                <include name="app/**" />
+                <include name="bin/dossier.php" />
+                <include name="src/**" />
+                <include name="vendor/**" />
+                
+                <exclude name="**/.git*"/>
+                <exclude name="**/*.dist"/>
+                <exclude name="**/*.dist"/> 
+                <exclude name="app/conf/*_dev.yaml"/>
+                <exclude name="app/conf/*_test.yaml"/>
+                <exclude name="vendor/**/*.md"/>
+                <exclude name="vendor/**/docs/"/>
+                <exclude name="vendor/**/tests/"/>
+            </fileset>
+        </copy>
     </target>
     
 
-    <target name="test" depends="prepare">
+    <target name="test" depends="__prepare">
         <echo>Running Tests</echo>
-        <phpunit pharlocation="${project.bindir}/phpunit" configuration="${project.dir}/phpunit.xml">
-            <formatter todir="${report.dir}" type="${report.format}"/>
+        <phpunit pharlocation="${exec.dir}/phpunit" haltonfailure="true" printsummary="true"
+            bootstrap="${src.dir}/bootstrap.php">
+            <batchtest>
+                <fileset dir="${test.dir}">
+                    <include name="**/*Test.php"/>
+                </fileset>
+            </batchtest>
         </phpunit>
     </target>
 
-    <target name="build" depends="test">
+    
+    <target name="build" depends="__copy">
         <echo>Building PHAR</echo>
         <pharpackage destfile="${release.dir}/${project.name}.phar" 
             basedir="${project.dir}"
