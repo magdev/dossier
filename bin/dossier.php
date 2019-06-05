@@ -38,18 +38,17 @@ $app = new Application('dossier.phar', '1.0.0');
 $app->add(new Command\Dossier\DossierBuildCommand());
 $app->add(new Command\Dossier\DossierInitCommand());
 $app->add(new Command\Dossier\DossierStatusCommand());
-$app->add(new Command\Intro\IntroAddCommand());
-$app->add(new Command\Intro\IntroEditCommand());
-$app->add(new Command\Person\PersonAddCommand());
-$app->add(new Command\Person\PersonEditCommand());
-$app->add(new Command\Cv\CvAddCommand());
-$app->add(new Command\Cv\CvEditCommand());
+
+$app->add(new Command\Create\CreateIntroCommand());
+$app->add(new Command\Create\CreatePersonCommand());
+$app->add(new Command\Create\CreateCvCommand());
+$app->add(new Command\Create\CreateProjectCommand());
+
 $app->add(new Command\Config\ConfigShowCommand());
 $app->add(new Command\Config\ConfigGetCommand());
 $app->add(new Command\Config\ConfigSetCommand());
 $app->add(new Command\Config\ConfigUnsetCommand());
-$app->add(new Command\Theme\ThemeListCommand());
-$app->add(new Command\Theme\ThemeDumpCommand());
+
 $app->add(new Command\Cache\CacheClearCommand());
 $app->add(new Command\Server\ServerStartCommand());
 $app->add(new Command\Dev\PharExtractCommand());
