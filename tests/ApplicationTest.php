@@ -37,18 +37,33 @@ use Magdev\Dossier\Service\GitService;
 
 class ApplicationTest extends TestCase
 {
+    /**
+     * @var \Magdev\Dossier\Application
+     */
     private $app = null;
     
+    
+    /**
+     * Setup TestCase
+     */
     public function setup(): void
     {
         $this->app = new Application();
     }
     
+    
+    /**
+     * @group core
+     */
     public function testGetContainer()
     {
         $this->assertInstanceOf(ContainerBuilder::class, $this->app->getContainer());
     }
     
+    
+    /**
+     * @group core
+     */
     public function testGetValidService()
     {
         $this->assertInstanceOf(GitService::class, $this->app->getService('git'));
