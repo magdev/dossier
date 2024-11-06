@@ -34,7 +34,7 @@
 		"symfony/event-dispatcher" : "^4.1",
 		"symfony/process" : "^4.1",
 		"symfony/dotenv" : "^4.1",
-		"twig/twig" : "^2.4",
+		"twig/twig" : "^3.11",
 		"mnapoli/front-yaml" : "^1.6",
 		"oyejorge/less.php" : "v1.7.0.14",
 		"erusev/parsedown-extra" : "^0.7.1",
